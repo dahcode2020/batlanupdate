@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Système de gestion de microfinance pour la Banque Atlantique - Gestion des comptes, crédits et portefeuilles clients" />
+    <meta name="keywords" content="banque, microfinance, crédit, épargne, Togo, Banque Atlantique" />
+    <meta name="author" content="Banque Atlantique" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Banque Atlantique - Système de Microfinance" />
+    <meta property="og:description" content="Système de gestion de microfinance pour la Banque Atlantique" />
+    <meta property="og:image" content="/BACI-Logo-slogan.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Banque Atlantique - Système de Microfinance" />
+    <meta property="twitter:description" content="Système de gestion de microfinance pour la Banque Atlantique" />
+    <meta property="twitter:image" content="/BACI-Logo-slogan.png" />
+    
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="https://banqueatlantique.tg" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ea580c" />
+    
+    <title>Banque Atlantique - Système de Microfinance</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/BACI-Logo-slogan.png" as="image" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Performance hints -->
+    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+  </head>
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>JavaScript requis</h1>
+        <p>Cette application nécessite JavaScript pour fonctionner correctement.</p>
+        <p>Veuillez activer JavaScript dans votre navigateur et recharger la page.</p>
+      </div>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

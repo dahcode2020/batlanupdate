@@ -1,0 +1,74 @@
+{
+  "name": "Banque Atlantique - Système de Microfinance",
+  "short_name": "Banque Atlantique",
+  "description": "Système de gestion de microfinance pour la Banque Atlantique",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "id": "banque-atlantique-microfinance",
+  "icons": [
+    {
+      "src": "/BACI-Logo-slogan.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BACI-Logo-slogan.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BACI-Logo-slogan.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/BACI-Logo-slogan.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business"],
+  "lang": "fr-FR",
+  "screenshots": [
+    {
+      "src": "/BACI-Logo-slogan.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tableau de bord",
+      "short_name": "Dashboard",
+      "description": "Accéder au tableau de bord principal",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/BACI-Logo-slogan.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Virements",
+      "short_name": "Transfers",
+      "description": "Effectuer un virement",
+      "url": "/transfers",
+      "icons": [
+        {
+          "src": "/BACI-Logo-slogan.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
