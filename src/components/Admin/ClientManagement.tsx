@@ -5,6 +5,7 @@ import {
   Plus,
   Edit,
   Eye,
+  EyeOff,
   Trash2,
   Filter,
   UserCheck,
@@ -15,7 +16,6 @@ import {
   Calendar,
   Save,
   X,
-  EyeOff,
   Lock
 } from 'lucide-react';
 import { useUsers, useAllAccounts } from '../../hooks/useData';
