@@ -312,38 +312,33 @@ export const userService = {
       clearCachePattern('users_');
       clearCachePattern('accounts_');
 
-      // Essayer d'abord avec une fonction RPC qui contourne RLS
-      try {
-        const { error: rpcError } = await supabase.rpc('delete_user_admin', {
-          p_user_id: id
-        });
+      const { error: rpcError } = await supabase.rpc('delete_user_admin', {
+        p_user_id: id
+      });
 
-        if (rpcError && rpcError.code !== '42883') {
-          throw rpcError;
-        }
-
-        if (!rpcError) {
-          logger.info('User deleted via RPC', { id });
-          return;
-        } else {
-          throw new Error('RPC function not available');
-        }
-      } catch (rpcErr) {
-        logger.warn('RPC not available for deletion, using direct method');
-
-        // Fallback vers suppression directe
-        const { error: deleteError } = await supabase
-          .from('users')
-          .delete()
-          .eq('id', id);
-
-        if (deleteError) {
-          logger.error('Error deleting user', deleteError, { id });
-          throw deleteError;
-        }
-
-        logger.info('User deleted via direct method', { id });
+      if (!rpcError) {
+        logger.info('User deleted via RPC', { id });
+        return;
       }
+
+      if (rpcError.code !== '42883') {
+        logger.error('Error deleting user via RPC', rpcError, { id });
+        throw rpcError;
+      }
+
+      logger.warn('Deletion RPC is unavailable, using direct method');
+
+      const { error: deleteError } = await supabase
+        .from('users')
+        .delete()
+        .eq('id', id);
+
+      if (deleteError) {
+        logger.error('Error deleting user', deleteError, { id });
+        throw deleteError;
+      }
+
+      logger.info('User deleted via direct method', { id });
     } catch (error) {
       logger.error('Error deleting user', error as Error);
       throw error;

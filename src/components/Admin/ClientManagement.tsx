@@ -1,23 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Users,
-  Search,
-  Plus,
-  Edit,
-  Eye,
-  EyeOff,
-  Trash2,
-  Filter,
-  UserCheck,
-  UserX,
-  Phone,
-  Mail,
-  MapPin,
-  Calendar,
-  Save,
-  X,
-  Lock
-} from 'lucide-react';
+import { Users, Search, Plus, CreditCard as Edit, Eye, EyeOff, Trash2, Filter, UserCheck, UserX, Phone, Mail, MapPin, Calendar, Save, X, Lock } from 'lucide-react';
 import { useUsers, useAllAccounts } from '../../hooks/useData';
 import { userService, accountService } from '../../services/database';
 import { User, Account } from '../../types';
@@ -130,37 +112,24 @@ const ClientManagement: React.FC = () => {
     }
   };
 
-  const handleDeleteClient = (clientId: string) => {
+  const handleDeleteClient = async (clientId: string) => {
     disableSessionTimer(10000);
 
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce client ?')) {
-      setProcessingId(clientId);
-      
-      try {
-        // Supprimer le client de la base de données
-        userService.delete(clientId)
-          .then(() => {
-            // Rafraîchir les données
-            refetchUsers();
-            refetchAccounts();
-            
-            // Utiliser setTimeout pour éviter que l'alert interfère avec le timer de session
-            setTimeout(() => {
-              alert('✅ Client supprimé avec succès !');
-            }, 100);
-          })
-          .catch((error) => {
-            console.error('Erreur lors de la suppression:', error);
-            alert('❌ Erreur lors de la suppression. Veuillez réessayer.');
-          })
-          .finally(() => {
-            setProcessingId(null);
-          });
-      } catch (error) {
-        console.error('Erreur lors de la suppression:', error);
-        alert('❌ Erreur lors de la suppression. Veuillez réessayer.');
-        setProcessingId(null);
-      }
+    if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce client ?')) return;
+
+    setProcessingId(clientId);
+
+    try {
+      await userService.delete(clientId);
+      await Promise.all([refetchUsers(), refetchAccounts()]);
+      setSelectedClient(null);
+      setShowModal(false);
+      alert('Client supprimé avec succès.');
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+      alert('Erreur lors de la suppression. Veuillez réessayer.');
+    } finally {
+      setProcessingId(null);
     }
   };
 
